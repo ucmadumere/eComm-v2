@@ -61,19 +61,13 @@ const OrderScreen = () => {
   function onApprove(data, actions) {
     return actions.order.capture().then(async function (details) {
         try {
-            await payOrder({orderId, details});
+            await payOrder({orderId, details}).unwrap();
             refetch();
             toast.success('Payment successful');
         } catch (err) {
             toast.error(err?.data?.message || err.message);
         }
     })
-  }
-
-  async function onApproveTest() {
-    await payOrder({orderId, details: {payer: {} }});
-    refetch();
-    toast.success('Payment successful');
   }
   
   function onError(err) {
@@ -107,7 +101,7 @@ const OrderScreen = () => {
   return isLoading ? (
     <Loader />
   ) : error ? (
-    <Message variant='danger'>{error.data.message}</Message>
+    <Message variant='danger'>{error?.data?.message || error.error}</Message>
   ) : (
     <>
       <h1>Order {order._id}</h1>
@@ -221,7 +215,6 @@ const OrderScreen = () => {
 
                     {isPending ? <Loader/> : (
                         <div>
-                            <Button onClick={onApproveTest} style={{marginBottom: '10px'}}>Test Pay Order</Button>
                             <div>
                                 <PayPalButtons>
                                     createOrder={createOrder}

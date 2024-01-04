@@ -14,7 +14,7 @@ const PlaceOrderScreen = () => {
 
   const cart = useSelector((state) => state.cart);
 
-  const [createOrder, { isLoading }] = useCreateOrderMutation();
+  const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 
   useEffect(() => {
     if (!cart.shippingAddress.address) {
@@ -130,9 +130,9 @@ const PlaceOrderScreen = () => {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
-                {/* {error && (
+                {error && (
                   <Message variant='danger'>{error.data.message}</Message>
-                )} */}
+                )}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button
