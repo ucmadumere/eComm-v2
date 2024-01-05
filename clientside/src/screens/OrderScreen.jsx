@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap';
@@ -7,10 +8,11 @@ import { toast } from 'react-toastify';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import {
-  useDeliverOrderMutation,
   useGetOrderDetailsQuery,
-  useGetPaypalClientIdQuery,
   usePayOrderMutation,
+  useDeliverOrderMutation,
+  useGetPaypalClientIdQuery,
+  
 } from '../slices/orderApiSlice';
 
 const OrderScreen = () => {
@@ -28,8 +30,6 @@ const OrderScreen = () => {
   const [deliverOrder, { isLoading: loadingDeliver }] =
     useDeliverOrderMutation();
 
-  const { userInfo } = useSelector((state) => state.auth);
-
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
   const {
@@ -37,6 +37,10 @@ const OrderScreen = () => {
     isLoading: loadingPayPal,
     error: errorPayPal,
   } = useGetPaypalClientIdQuery();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  
 
   useEffect(() => {
     if (!errorPayPal && !loadingPayPal && paypal.clientId) {
@@ -58,6 +62,8 @@ const OrderScreen = () => {
     }
   }, [order, paypal, paypalDispatch,loadingPayPal, errorPayPal]);
 
+
+
   function onApprove(data, actions) {
     return actions.order.capture().then(async function (details) {
         try {
@@ -68,6 +74,13 @@ const OrderScreen = () => {
             toast.error(err?.data?.message || err.message);
         }
     })
+  }
+
+  async function onApproveTest() {
+    await payOrder({ orderId, details: { payer: {} } });
+    refetch();
+
+    toast.success('Order is paid');
   }
   
   function onError(err) {
@@ -209,21 +222,31 @@ const OrderScreen = () => {
                 </Row>
               </ListGroup.Item>
               
-              { !order.isPaid && (
+              {!order.isPaid && (
                 <ListGroup.Item>
                     {loadingPay && <Loader/>}
 
-                    {isPending ? <Loader/> : (
-                        <div>
-                            <div>
-                                <PayPalButtons>
-                                    createOrder={createOrder}
-                                    onApprove={onApprove}
-                                    onError={onError}
-                                </PayPalButtons>
-                            </div>
-                        </div>
-                    )}
+                    {isPending ? (
+                    <Loader />
+                  ) : (
+                    <div>
+                      {/* THIS BUTTON IS FOR TESTING! REMOVE BEFORE PRODUCTION! */}
+                      <Button
+                        style={{ marginBottom: '10px' }}
+                        onClick={onApproveTest}
+                      >
+                        Test Pay Order
+                      </Button>
+
+                      <div>
+                        <PayPalButtons
+                          createOrder={createOrder}
+                          onApprove={onApprove}
+                          onError={onError}
+                        ></PayPalButtons>
+                      </div>
+                    </div>
+                  )}
                 </ListGroup.Item>
               )}
 
