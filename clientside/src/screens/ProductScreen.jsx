@@ -63,7 +63,7 @@ const Productscreen = () => {
   };
 
   return (
-    <>
+    <div className="mx-3">
       <Link className="btn btn-light my-3" to="/">
         Go Back
       </Link>
@@ -220,7 +220,7 @@ const Productscreen = () => {
           </Row>
         </>
       )}
-    </>
+    </div>
   );
 };
 

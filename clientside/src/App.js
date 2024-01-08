@@ -11,8 +11,8 @@ function App() {
   return (
     <>
     <Header/>
-    <main className='py-3'>
-      <Container>
+    <main className='py-0'>
+      <Container className='p-0' fluid>
         <Outlet/>
       </Container>
     </main>

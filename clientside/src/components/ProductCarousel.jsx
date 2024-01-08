@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Carousel, Image } from 'react-bootstrap';
 import Message from './Message';
@@ -8,6 +8,11 @@ import Loader from './Loader';
 const ProductCarousel = () => {
   const { data: products, isLoading, error } = useGetTopProductsQuery();
 
+  const imageStyle = {
+    height: '500px',
+    width: '100%'
+};
+
   return isLoading ? <Loader /> : error ? (
     <Message variant='danger'>{error}</Message>
   ) : (
@@ -15,7 +20,7 @@ const ProductCarousel = () => {
       {products.map((product) => (
         <Carousel.Item key={product._id}>
           <Link to={`/product/${product._id}`}>
-            <Image src={product.image} alt={product.name} fluid />
+            <Image style={imageStyle} src={product.image} alt={product.name} fluid />
             <Carousel.Caption className='carousel-caption'>
               <h2 className='text-white text-right'>
                 {product.name} (${product.price})

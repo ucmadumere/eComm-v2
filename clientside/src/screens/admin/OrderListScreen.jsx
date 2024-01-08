@@ -14,7 +14,7 @@ const OrderListScreen = () => {
   const {data, isLoading, error} = useGetOrdersQuery({pageNumber});
  
   return (
-    <>
+    <div className='m-3'>
       <h1>Orders</h1>
       {isLoading ? (
         <Loader />
@@ -71,7 +71,7 @@ const OrderListScreen = () => {
         <Paginate pages={data.pages} page={data.page} isAdmin={true} />
         </>
       )}
-    </>
+    </div>
   )
 }
 

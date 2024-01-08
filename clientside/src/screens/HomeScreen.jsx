@@ -31,8 +31,8 @@ const HomeScreen = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (<Message variant='danger'>error?.data.message</Message>) : (<>
-        <h1>Latest Products</h1>
-        <Row>
+        <h1 className='text-center mx-auto'>Latest Products</h1>
+        <Row className='mx-5'>
           {data.products.map((product) => (
             <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
               <Product product={product} />

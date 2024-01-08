@@ -45,7 +45,7 @@ const ProductListScreen = () => {
   };
 
   return (
-    <>
+    <div className='m-3'>
       <Row className='align-items-center'>
         <Col>
           <h1>Products</h1>
@@ -103,7 +103,7 @@ const ProductListScreen = () => {
         </>
       )}
 
-    </>
+    </div>
   )
 }
 

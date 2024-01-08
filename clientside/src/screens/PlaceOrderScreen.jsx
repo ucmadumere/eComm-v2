@@ -46,7 +46,7 @@ const PlaceOrderScreen = () => {
   return (
     <>
       <CheckoutStep step1 step2 step3 step4 />
-      <Row>
+      <Row className='mx-3'>
         <Col md={8}>
           <ListGroup variant='flush'>
             <ListGroup.Item>

@@ -25,7 +25,7 @@ const UserListScreen = () => {
   }
  
   return (
-    <>
+    <div className='m-3'>
       <h1>Users</h1>
       {loadingDelete && <Loader />}
       {isLoading ? (
@@ -74,7 +74,7 @@ const UserListScreen = () => {
           </tbody>
         </Table>
       )}
-    </>
+    </div>
   )
 }
 

@@ -30,14 +30,18 @@ const Header = () => {
         }
     }
 
+    // const textStyle = {
+        
+    // };
+
   return (
     <header>
         <Navbar bg='dark' variant='dark' expand='md' collapseOnSelect>
             <Container>
                 <LinkContainer to='/'>
-                <Navbar.Brand>
+                <Navbar.Brand className='header-logo-text'>
                     {/* <img src={logo} alt="eShop" /> */}
-                    TOPHER</Navbar.Brand>
+                    TOPHER SCENTS</Navbar.Brand>
                 </LinkContainer>
                 
                 <Navbar.Toggle aria-controls='basic-navbar-nav'/>
