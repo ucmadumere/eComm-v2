@@ -37,7 +37,7 @@ const Header = () => {
                 <LinkContainer to='/'>
                 <Navbar.Brand>
                     {/* <img src={logo} alt="eShop" /> */}
-                    eShop</Navbar.Brand>
+                    TOPHER</Navbar.Brand>
                 </LinkContainer>
                 
                 <Navbar.Toggle aria-controls='basic-navbar-nav'/>
@@ -46,7 +46,7 @@ const Header = () => {
                         <SearchBox />
                         <LinkContainer to='/cart'>
                         <Nav.Link>
-                            <FaShoppingCart/>Cart
+                            <FaShoppingCart/>
                             {
                                 cartItems.length > 0 && (
                                     <Badge pill bg='success' style={{marginLeft: '5px'}}>
