@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Carousel, Image } from 'react-bootstrap';
 import Message from './Message';
 import { useGetTopProductsQuery } from '../slices/productApiSlice';
-import Loader from './Loader';
 
 const ProductCarousel = () => {
   const { data: products, isLoading, error } = useGetTopProductsQuery();
@@ -13,7 +12,7 @@ const ProductCarousel = () => {
     width: '100%'
 };
 
-  return isLoading ? <Loader /> : error ? (
+  return isLoading ? '' : error ? (
     <Message variant='danger'>{error}</Message>
   ) : (
     <Carousel pause='hover' className='bg-primary mb-4'>
